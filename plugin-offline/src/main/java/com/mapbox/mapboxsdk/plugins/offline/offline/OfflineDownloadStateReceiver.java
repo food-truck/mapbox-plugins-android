@@ -91,6 +91,9 @@ public class OfflineDownloadStateReceiver extends BroadcastReceiver {
 
   static PendingIntent createNotificationIntent(Context context, OfflineDownloadOptions offlineDownload) {
     Class returnActivity = offlineDownload.notificationOptions().getReturnActivity();
+    if (returnActivity == null) {
+      return null;
+    }
     Intent notificationIntent = new Intent(context, returnActivity);
     notificationIntent.putExtra(KEY_BUNDLE, offlineDownload);
     return PendingIntent.getActivity(

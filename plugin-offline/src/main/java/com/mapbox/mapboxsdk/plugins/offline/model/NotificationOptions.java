@@ -20,8 +20,7 @@ public abstract class NotificationOptions implements Parcelable {
     try {
       return Class.forName(returnActivity());
     } catch (ClassNotFoundException exception) {
-      throw new IllegalArgumentException("The returning class name " + returnActivity()
-        + " cannot be found.");
+      return null;
     }
   }
 

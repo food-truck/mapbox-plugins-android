@@ -42,16 +42,19 @@ public class NotificationUtils {
                                                                  PendingIntent contentIntent,
                                                                  NotificationOptions options,
                                                                  Intent cancelIntent) {
-    return new NotificationCompat.Builder(context, OfflineConstants.NOTIFICATION_CHANNEL)
+    NotificationCompat.Builder builder =  new NotificationCompat.Builder(context, OfflineConstants.NOTIFICATION_CHANNEL)
       .setContentTitle(options.contentTitle())
       .setContentText(options.contentText())
       .setCategory(NotificationCompat.CATEGORY_PROGRESS)
       .setSmallIcon(options.smallIconRes())
       .setOnlyAlertOnce(true)
-      .setContentIntent(contentIntent)
       .addAction(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP ? 0 : R.drawable.ic_cancel,
         options.cancelText(),
         PendingIntent.getService(context, offlineDownload.uuid().intValue(), cancelIntent,
           PendingIntent.FLAG_CANCEL_CURRENT));
+    if (contentIntent != null) {
+      builder.setContentIntent(contentIntent);
+    }
+    return builder;
   }
 }
