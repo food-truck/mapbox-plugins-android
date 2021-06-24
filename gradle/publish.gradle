@@ -9,17 +9,17 @@ static def isLocalBuild() {
   if (System.getenv('IS_LOCAL_DEVELOPMENT') != null) {
     return System.getenv('IS_LOCAL_DEVELOPMENT').toBoolean()
   }
-  return true
+  return false
 }
 
 def getReleaseRepositoryUrl() {
   return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
-      : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+      : "file:${rootDir}/mvn-repo/"
 }
 
 def getSnapshotRepositoryUrl() {
   return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
-      : "https://oss.sonatype.org/content/repositories/snapshots/"
+      : "file:${rootDir}/mvn-repo/snapshots/"
 }
 
 def obtainMavenLocalUrl() {
