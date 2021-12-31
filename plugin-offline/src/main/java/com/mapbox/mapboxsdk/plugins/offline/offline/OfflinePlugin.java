@@ -83,7 +83,7 @@ public class OfflinePlugin {
     Intent intent = new Intent(context, OfflineDownloadService.class);
     intent.setAction(OfflineConstants.ACTION_START_DOWNLOAD);
     intent.putExtra(KEY_BUNDLE, options);
-    context.startService(intent);
+    context.startForegroundService(intent);
   }
 
   /**
@@ -96,7 +96,7 @@ public class OfflinePlugin {
     Intent intent = new Intent(context, OfflineDownloadService.class);
     intent.setAction(OfflineConstants.ACTION_CANCEL_DOWNLOAD);
     intent.putExtra(KEY_BUNDLE, offlineDownload);
-    context.startService(intent);
+    context.startForegroundService(intent);
   }
 
   /**
